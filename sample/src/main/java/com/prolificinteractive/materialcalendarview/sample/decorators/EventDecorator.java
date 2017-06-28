@@ -11,7 +11,7 @@ import java.util.HashSet;
 /**
  * Decorate several days with a dot
  */
-public class EventDecorator implements DayViewDecorator {
+public class EventDecorator extends DayViewDecorator {
 
     private int color;
     private HashSet<CalendarDay> dates;

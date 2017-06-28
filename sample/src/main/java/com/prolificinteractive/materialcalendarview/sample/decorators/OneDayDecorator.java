@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * Decorate a day by making the text big and bold
  */
-public class OneDayDecorator implements DayViewDecorator {
+public class OneDayDecorator extends DayViewDecorator {
 
     private CalendarDay date;
 

@@ -1324,6 +1324,10 @@ public class MaterialCalendarView extends ViewGroup {
         adapter.invalidateDecorators();
     }
 
+    public void invalidateDecorator(CalendarDay day) {
+        adapter.invalidateDecorator(day);
+    }
+
     /*
      * Listener/Callback Code
      */

@@ -50,4 +50,5 @@
 
 
     <string name="today">Today is the day</string>
+    <string name="title_feature_test_activity">Feature Test Activity</string>
 </resources>

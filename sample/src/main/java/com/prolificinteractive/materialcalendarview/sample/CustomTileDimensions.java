@@ -94,7 +94,7 @@ public class CustomTileDimensions extends AppCompatActivity {
             .show();
   }
 
-  private class TodayDecorator implements DayViewDecorator {
+  private class TodayDecorator extends DayViewDecorator {
 
     private final CalendarDay today;
     private final Drawable backgroundDrawable;

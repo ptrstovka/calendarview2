@@ -48,7 +48,7 @@ public class DisableDaysActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private static class PrimeDayDisableDecorator implements DayViewDecorator {
+    private static class PrimeDayDisableDecorator extends DayViewDecorator {
 
         @Override
         public boolean shouldDecorate(CalendarDay day) {
@@ -99,7 +99,7 @@ public class DisableDaysActivity extends AppCompatActivity {
         };
     }
 
-    private static class EnableOneToTenDecorator implements DayViewDecorator {
+    private static class EnableOneToTenDecorator extends DayViewDecorator {
 
         @Override
         public boolean shouldDecorate(CalendarDay day) {

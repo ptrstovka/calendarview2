@@ -19,7 +19,6 @@ import java.util.List;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.SHOW_DEFAULTS;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOtherMonths;
 import static java.util.Calendar.DATE;
-import static java.util.Calendar.DAY_OF_WEEK;
 
 abstract class CalendarPagerView extends ViewGroup implements View.OnClickListener {
 
@@ -173,14 +172,42 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
         postInvalidate();
     }
 
+    protected void invalidateDecorator(CalendarDay day) {
+        for (DayView dayView : dayViews) {
+            if (dayView.getDate().equals(day)) {
+                DayViewFacade facade = new DayViewFacade();
+                facade.reset();
+
+                for (DecoratorResult decoratorResult : decoratorResults) {
+                    applyDecorator(decoratorResult, dayView, facade);
+                }
+
+                dayView.applyFacade(facade);
+                break;
+            }
+        }
+    }
+
+    private void applyDecorator(DecoratorResult result, DayView dayView, DayViewFacade facade) {
+        if (result.decorator.shouldDecorate(dayView.getDate())){
+            if (result.decorator.shouldDecorate(dayView.getDate())) {
+
+                    if (!result.decorator.isCached()) {
+                        result.result.reset();
+                        result.decorator.decorate(result.result);
+                    }
+
+                result.result.applyTo(facade);
+            }
+        }
+    }
+
     protected void invalidateDecorators() {
         final DayViewFacade facadeAccumulator = new DayViewFacade();
         for (DayView dayView : dayViews) {
             facadeAccumulator.reset();
             for (DecoratorResult result : decoratorResults) {
-                if (result.decorator.shouldDecorate(dayView.getDate())) {
-                    result.result.applyTo(facadeAccumulator);
-                }
+                applyDecorator(result, dayView, facadeAccumulator);
             }
             dayView.applyFacade(facadeAccumulator);
         }
@@ -336,6 +363,7 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
          * {@inheritDoc}
          */
         public LayoutParams() {
+            //noinspection ResourceType
             super(WRAP_CONTENT, WRAP_CONTENT);
         }
     }

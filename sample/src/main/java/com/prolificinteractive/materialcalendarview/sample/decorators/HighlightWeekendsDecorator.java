@@ -13,7 +13,7 @@ import java.util.Calendar;
 /**
  * Highlight Saturdays and Sundays with a background
  */
-public class HighlightWeekendsDecorator implements DayViewDecorator {
+public class HighlightWeekendsDecorator extends DayViewDecorator {
 
     private final Calendar calendar = Calendar.getInstance();
     private final Drawable highlightDrawable;

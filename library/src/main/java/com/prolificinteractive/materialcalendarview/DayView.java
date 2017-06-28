@@ -16,18 +16,22 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckedTextView;
 
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView.ShowOtherDates;
 import com.prolificinteractive.materialcalendarview.format.DayFormatter;
+import com.prolificinteractive.materialcalendarview.utils.ObjectHelper;
 
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showDecoratedDisabled;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOtherMonths;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOutOfRange;
+import static com.prolificinteractive.materialcalendarview.utils.ColorUtils.transparent;
 
 /**
  * Display one day of a {@linkplain MaterialCalendarView}
@@ -106,6 +110,10 @@ class DayView extends CheckedTextView {
      * @param drawable custom selection drawable
      */
     public void setSelectionDrawable(Drawable drawable) {
+        if (ObjectHelper.equals(drawable, selectionDrawable)) {
+            return;
+        }
+
         if (drawable == null) {
             this.selectionDrawable = null;
         } else {
@@ -118,6 +126,11 @@ class DayView extends CheckedTextView {
      * @param drawable background to draw behind everything else
      */
     public void setCustomBackground(Drawable drawable) {
+
+        if (ObjectHelper.equals(drawable, customBackground)) {
+            return;
+        }
+
         if (drawable == null) {
             this.customBackground = null;
         } else {
@@ -194,11 +207,12 @@ class DayView extends CheckedTextView {
     private static Drawable generateBackground(int color, int fadeTime, Rect bounds) {
         StateListDrawable drawable = new StateListDrawable();
         drawable.setExitFadeDuration(fadeTime);
+        drawable.setEnterFadeDuration(fadeTime);
         drawable.addState(new int[]{android.R.attr.state_checked}, generateCircleDrawable(color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawable.addState(new int[]{android.R.attr.state_pressed}, generateRippleDrawable(color, bounds));
         } else {
-            drawable.addState(new int[]{android.R.attr.state_pressed}, generateCircleDrawable(color));
+            drawable.addState(new int[]{android.R.attr.state_pressed}, generateCircleDrawable(transparent(color, 0.5f)));
         }
 
         drawable.addState(new int[]{}, generateCircleDrawable(Color.TRANSPARENT));
@@ -260,7 +274,14 @@ class DayView extends CheckedTextView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        calculateBounds(right - left, bottom - top);
+
+        if (changed) {
+            invalidateBackground(right - left, bottom - top);
+        }
+    }
+
+    private void invalidateBackground(int width, int height) {
+        calculateBounds(width, height);
         regenerateBackground();
     }
 

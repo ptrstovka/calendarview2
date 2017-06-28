@@ -11,7 +11,7 @@ import com.prolificinteractive.materialcalendarview.sample.R;
 /**
  * Use a custom selector
  */
-public class MySelectorDecorator implements DayViewDecorator {
+public class MySelectorDecorator extends DayViewDecorator {
 
     private final Drawable drawable;
 
