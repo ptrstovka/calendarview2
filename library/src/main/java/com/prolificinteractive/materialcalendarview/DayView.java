@@ -49,6 +49,9 @@ class DayView extends CheckedTextView {
     private boolean isInRange = true;
     private boolean isInMonth = true;
     private boolean isDecoratedDisabled = false;
+
+    private int circlePadding = 0;
+
     @ShowOtherDates
     private int showOtherDates = MaterialCalendarView.SHOW_DEFAULTS;
 
@@ -71,6 +74,11 @@ class DayView extends CheckedTextView {
     public void setDay(CalendarDay date) {
         this.date = date;
         setText(getLabel());
+    }
+
+    public void setCirclePadding(int padding) {
+        circlePadding = padding;
+        requestLayout();
     }
 
     /**
@@ -283,18 +291,32 @@ class DayView extends CheckedTextView {
     }
 
     private void calculateBounds(int width, int height) {
-        final int radius = Math.min(height, width);
-        final int offset = Math.abs(height - width) / 2;
+
+        int totalWidth = width - (2*circlePadding);
+        int totalHeight = height - (2* circlePadding);
+
+        final int radius = Math.min(totalHeight, totalWidth);
+        final int offset = Math.abs(totalHeight - totalWidth) / 2;
 
         // Lollipop platform bug. Circle drawable offset needs to be half of normal offset
         final int circleOffset = Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP ? offset / 2 : offset;
 
-        if (width >= height) {
-            tempRect.set(offset, 0, radius + offset, height);
-            circleDrawableRect.set(circleOffset, 0, radius + circleOffset, height);
+        if (totalWidth >= totalHeight) {
+            tempRect.set(offset, 0, radius + offset, totalHeight);
+            circleDrawableRect.set(
+                    circleOffset + circlePadding,
+                    circlePadding,
+                    radius + circleOffset + circlePadding,
+                    totalHeight + circlePadding
+            );
         } else {
-            tempRect.set(0, offset, width, radius + offset);
-            circleDrawableRect.set(0, circleOffset, width, radius + circleOffset);
+            tempRect.set(0, offset, totalWidth, radius + offset);
+            circleDrawableRect.set(
+                    circlePadding,
+                    circleOffset + circlePadding,
+                    totalWidth + circlePadding,
+                    radius + circleOffset + circlePadding
+            );
         }
     }
 }

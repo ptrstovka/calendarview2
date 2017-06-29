@@ -115,6 +115,12 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
         }
     }
 
+    public void setDayCirclePadding(int padding) {
+        for (DayView dayView : dayViews) {
+            dayView.setCirclePadding(padding);
+        }
+    }
+
     public void setShowOtherDates(@ShowOtherDates int showFlags) {
         this.showOtherDates = showFlags;
         updateUi();

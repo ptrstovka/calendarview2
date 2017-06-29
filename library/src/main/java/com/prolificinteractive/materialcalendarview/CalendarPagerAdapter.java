@@ -40,6 +40,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     private List<DayViewDecorator> decorators = new ArrayList<>();
     private List<DecoratorResult> decoratorResults = null;
     private boolean selectionEnabled = true;
+    private int dayCirclePadding;
 
     CalendarPagerAdapter(MaterialCalendarView mcv) {
         this.mcv = mcv;
@@ -81,6 +82,15 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         return rangeIndex.getCount();
     }
 
+    private static final String TAG = "CalendarPagerAdapter";
+
+    public void setDayCirclePadding(int padding) {
+        dayCirclePadding = padding;
+        for (V currentView : currentViews) {
+            currentView.setDayCirclePadding(padding);
+        }
+    }
+
     @Override
     public CharSequence getPageTitle(int position) {
         return titleFormatter == null ? "" : titleFormatter.format(getItem(position));
@@ -89,6 +99,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     public CalendarPagerAdapter<?> migrateStateAndReturn(CalendarPagerAdapter<?> newAdapter) {
         newAdapter.titleFormatter = titleFormatter;
         newAdapter.color = color;
+        newAdapter.dayCirclePadding = dayCirclePadding;
         newAdapter.dateTextAppearance = dateTextAppearance;
         newAdapter.weekDayTextAppearance = weekDayTextAppearance;
         newAdapter.showOtherDates = showOtherDates;
@@ -159,6 +170,8 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         if (weekDayTextAppearance != null) {
             pagerView.setWeekDayTextAppearance(weekDayTextAppearance);
         }
+
+        pagerView.setDayCirclePadding(dayCirclePadding);
         pagerView.setShowOtherDates(showOtherDates);
         pagerView.setMinimumDate(minDate);
         pagerView.setMaximumDate(maxDate);

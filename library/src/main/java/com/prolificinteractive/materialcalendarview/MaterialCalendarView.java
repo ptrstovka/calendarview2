@@ -235,6 +235,8 @@ public class MaterialCalendarView extends ViewGroup {
     private boolean allowClickDaysOutsideCurrentMonth = true;
     private int firstDayOfWeek;
 
+    private int dayCirclePadding = 0;
+
     private State state;
 
     public MaterialCalendarView(Context context) {
@@ -375,6 +377,12 @@ public class MaterialCalendarView extends ViewGroup {
                     R.styleable.MaterialCalendarView_mcv_allowClickDaysOutsideCurrentMonth,
                     true
             ));
+
+            setDayCirclePadding(a.getDimensionPixelOffset(
+                    R.styleable.MaterialCalendarView_mcv_circlePadding,
+                    dayCirclePadding
+            ));
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -646,6 +654,12 @@ public class MaterialCalendarView extends ViewGroup {
         }
         accentColor = color;
         adapter.setSelectionColor(color);
+        invalidate();
+    }
+
+    public void setDayCirclePadding(int padding) {
+        dayCirclePadding = padding;
+        adapter.setDayCirclePadding(padding);
         invalidate();
     }
 

@@ -11,6 +11,8 @@
         android:id="@+id/calendar_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:mcv_weekDayTextAppearance="@style/CustomWeekTextAppearance"
+        app:mcv_circlePadding="10dp"
         />
 
     <Button
