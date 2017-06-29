@@ -190,7 +190,6 @@
             android:name=".FeatureTestActivity"
             android:label="@string/title_feature_test_activity"
             android:parentActivityName=".MainActivity"
-            android:exported="true"
             >
 
             <meta-data

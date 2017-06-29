@@ -16,7 +16,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckedTextView;
@@ -27,7 +26,6 @@ import com.prolificinteractive.materialcalendarview.utils.ObjectHelper;
 
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showDecoratedDisabled;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOtherMonths;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOutOfRange;
@@ -207,7 +205,6 @@ class DayView extends CheckedTextView {
     private static Drawable generateBackground(int color, int fadeTime, Rect bounds) {
         StateListDrawable drawable = new StateListDrawable();
         drawable.setExitFadeDuration(fadeTime);
-        drawable.setEnterFadeDuration(fadeTime);
         drawable.addState(new int[]{android.R.attr.state_checked}, generateCircleDrawable(color));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawable.addState(new int[]{android.R.attr.state_pressed}, generateRippleDrawable(color, bounds));

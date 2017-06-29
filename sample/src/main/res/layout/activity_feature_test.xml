@@ -11,7 +11,14 @@
         android:id="@+id/calendar_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:mcv_tileHeight="40dp"
+        />
+
+    <Button
+        android:id="@+id/calendar_invalidate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="invalidate"
         />
 
 </FrameLayout>
