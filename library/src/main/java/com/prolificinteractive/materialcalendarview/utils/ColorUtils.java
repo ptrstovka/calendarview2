@@ -18,4 +18,11 @@ public class ColorUtils {
         return argb(round(alpha(color) * alpha), red(color), green(color), blue(color));
     }
 
+    public static int lighter(int color, float factor) {
+        int red = (int) ((red(color) * (1 - factor) / 255 + factor) * 255);
+        int green = (int) ((green(color) * (1 - factor) / 255 + factor) * 255);
+        int blue = (int) ((blue(color) * (1 - factor) / 255 + factor) * 255);
+        return argb(alpha(color), red, green, blue);
+    }
+
 }

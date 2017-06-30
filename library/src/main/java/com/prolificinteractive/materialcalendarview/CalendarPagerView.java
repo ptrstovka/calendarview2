@@ -14,6 +14,7 @@ import com.prolificinteractive.materialcalendarview.format.WeekDayFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.SHOW_DEFAULTS;
@@ -162,12 +163,130 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
     }
 
     public void setSelectedDates(Collection<CalendarDay> dates) {
+
+        if (dates == null || dates.isEmpty()) {
+            for (DayView dayView : dayViews) {
+                dayView.setSelection(DayView.SELECTION_NORMAL);
+                dayView.setChecked(false);
+            }
+
+            postInvalidate();
+            return;
+        }
+
+        if (dates.size() == 1) {
+            for (DayView dayView : dayViews) {
+                if (dates.contains(dayView.getDate())) {
+                    dayView.setSelection(DayView.SELECTION_NORMAL);
+                    dayView.setChecked(true);
+                    break;
+                }
+            }
+
+            postInvalidate();
+            return;
+        }
+
+        ArrayList<CalendarDay> list = new ArrayList<>(dates);
+        Collections.sort(list, new CalendarDayComparator());
+
+        CalendarDay first = list.get(0);
+        CalendarDay last = list.get(list.size() - 1);
+
         for (DayView dayView : dayViews) {
             CalendarDay day = dayView.getDate();
-            dayView.setChecked(dates != null && dates.contains(day));
+            boolean isChecked = list.contains(day);
+
+            if (!isChecked) {
+                dayView.setSelection(DayView.SELECTION_NORMAL);
+                dayView.setChecked(false);
+                continue;
+            }
+
+            dayView.setChecked(true);
+
+            boolean isFirstDayInRow = false;
+            boolean isMiddleDayInRow = false;
+            boolean isLastDayInRow = false;
+
+            int firstDayOfWeek = day.getCalendar().getFirstDayOfWeek();
+            int lastDayOfWeek = firstDayOfWeek == Calendar.SUNDAY ?
+                    Calendar.SATURDAY : Calendar.SUNDAY;
+            int currentDayOfWeek = day.getCalendar().get(Calendar.DAY_OF_WEEK);
+
+            if (firstDayOfWeek == currentDayOfWeek) {
+                isFirstDayInRow = true;
+            } else if (lastDayOfWeek == currentDayOfWeek) {
+                isLastDayInRow = true;
+            } else {
+                isMiddleDayInRow = true;
+            }
+
+            boolean isFirstDay = first.equals(day);
+            boolean isLastDay = last != null && last.equals(day);
+            boolean isMiddleDay = !isFirstDay && !isLastDay;
+
+//            if (isMiddleDay) {
+//                dayView.setSelection(DayView.SELECTION_RANGE);
+//            } else {
+//                dayView.setSelection(DayView.SELECTION_NORMAL);
+//            }
+
+            if (isFirstDay && isFirstDayInRow) {
+                dayView.setSelection(DayView.SELECTION_FIRST);
+            } else if (isFirstDay && isMiddleDayInRow) {
+                dayView.setSelection(DayView.SELECTION_FIRST);
+            } else if (isFirstDay && isLastDay) {
+                dayView.setSelection(DayView.SELECTION_NORMAL);
+            } else if (isMiddleDay && isFirstDayInRow) {
+                dayView.setSelection(DayView.SELECTION_RANGE_LEFT);
+            } else if (isMiddleDay && isMiddleDayInRow) {
+                dayView.setSelection(DayView.SELECTION_RANGE);
+            } else if (isMiddleDay && isLastDayInRow) {
+                dayView.setSelection(DayView.SELECTION_RANGE_RIGHT);
+            } else if (isLastDay && isFirstDayInRow) {
+                dayView.setSelection(DayView.SELECTION_NORMAL);
+            } else if (isLastDay && isMiddleDayInRow) {
+                dayView.setSelection(DayView.SELECTION_LAST);
+            } else if (isLastDay && isLastDayInRow) {
+                dayView.setSelection(DayView.SELECTION_LAST);
+            }
+
+
+//            if (list.contains(day)) {
+//                dayView.setChecked(true);
+
+//                if (first.equals(day)) {
+//                    if (isLastDayOfWeek) {
+//                        dayView.setSelection(DayView.SELECTION_NORMAL);
+//                    } else {
+//                        dayView.setSelection(DayView.SELECTION_FIRST);
+//                    }
+//                } else if (last != null) {
+////                    if (last.equals(day)) {
+////
+////                    }
+//                }
+//
+//                if (isFirstDayInRow && !first.equals(day)) {
+//                    dayView.setSelection(DayView.SELECTION_NORMAL);
+//                } else if (isLastDayInRow && last != null && day.equals(last)) {
+//                    dayView.setSelection(DayView.SELECTION_NORMAL);
+//                } else if (first.equals(day)) {
+//                    dayView.setSelection(DayView.SELECTION_FIRST);
+//                } else if (last != null && day.equals(last)) {
+//                    dayView.setSelection(DayView.SELECTION_LAST);
+//                } else {
+//                    dayView.setSelection(DayView.SELECTION_RANGE);
+//                }
+
+
+//            dayView.setChecked(list != null && list.contains(day));
         }
         postInvalidate();
     }
+
+    private static final String TAG = "CalendarPagerView";
 
     protected void updateUi() {
         for (DayView dayView : dayViews) {
