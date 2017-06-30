@@ -20,6 +20,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.prolificinteractive.materialcalendarview.CalendarDay.from;
+import static com.prolificinteractive.materialcalendarview.Range.range;
+
 public class FeatureTestActivity extends AppCompatActivity {
 
     private static final String TAG = "FeatureTestActivity";
@@ -51,12 +54,12 @@ public class FeatureTestActivity extends AppCompatActivity {
 
         calendarView.addDecorator(new CurrentDayDecorator(calendarView));
 
-        calendarView.selectRange(CalendarDay.from(2017, 5, 8), CalendarDay.from(2017, 5, 16));
+        calendarView.select(range(from(2017, 5, 8), from(2017, 5, 16)));
     }
 
     @OnClick(R.id.calendar_invalidate_button)
     public void onInvalidateButtonClick() {
-        calendarView.selectRange(CalendarDay.from(2017, 5, 8), CalendarDay.from(2017, 5, 16));
+        calendarView.selectRange(from(2017, 5, 8), from(2017, 5, 16));
     }
 
     private class CurrentDayDecorator extends DayViewDecorator {

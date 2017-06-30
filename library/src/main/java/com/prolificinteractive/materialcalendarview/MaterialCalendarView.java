@@ -46,7 +46,7 @@ import java.util.List;
  * <p>
  * This class is a calendar widget for displaying and selecting dates.
  * The range of dates supported by this calendar is configurable.
- * A user can select a date by taping on it and can page the calendar to a desired date.
+ * A user can selectRange a date by taping on it and can page the calendar to a desired date.
  * </p>
  * <p>
  * By default, the range of dates shown is from 200 years in the past to 200 years in the future.
@@ -87,7 +87,7 @@ public class MaterialCalendarView extends ViewGroup {
 
     /**
      * Selection mode that allows one selected date at one time. This is the default mode.
-     * When switching from {@linkplain #SELECTION_MODE_MULTIPLE}, this will select the same date
+     * When switching from {@linkplain #SELECTION_MODE_MULTIPLE}, this will selectRange the same date
      * as from {@linkplain #getSelectedDate()}, which should be the last selected date
      */
     public static final int SELECTION_MODE_SINGLE = 1;
@@ -805,7 +805,7 @@ public class MaterialCalendarView extends ViewGroup {
     }
 
     /**
-     * @param calendar a Calendar set to a day to select. Null to clear selection
+     * @param calendar a Calendar set to a day to selectRange. Null to clear selection
      */
     public void setSelectedDate(@Nullable Calendar calendar) {
         setSelectedDate(CalendarDay.from(calendar));
@@ -1481,8 +1481,8 @@ public class MaterialCalendarView extends ViewGroup {
     /**
      * Select a fresh range of date including first day and last day.
      *
-     * @param firstDay first day of the range to select
-     * @param lastDay  last day of the range to select
+     * @param firstDay first day of the range to selectRange
+     * @param lastDay  last day of the range to selectRange
      */
     public void selectRange(final CalendarDay firstDay, final CalendarDay lastDay) {
         clearSelection();
@@ -1494,6 +1494,14 @@ public class MaterialCalendarView extends ViewGroup {
             dispatchOnRangeSelected(firstDay, lastDay);
         }
     }
+
+    public void select(Range range) {
+        this.selectRange(range.from, range.to);
+    }
+
+//    public void selectRanges(Range... ranges) {
+//
+//    }
 
     /**
      * Call by {@link CalendarPagerView} to indicate that a day was clicked and we should handle it
@@ -1881,7 +1889,7 @@ public class MaterialCalendarView extends ViewGroup {
 
         /**
          * Set calendar display mode. The default mode is Months.
-         * When switching between modes will select todays date, or the selected date,
+         * When switching between modes will selectRange todays date, or the selected date,
          * if selection mode is single.
          *
          * @param mode - calendar mode
