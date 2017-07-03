@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +47,7 @@ import java.util.List;
  * <p>
  * This class is a calendar widget for displaying and selecting dates.
  * The range of dates supported by this calendar is configurable.
- * A user can selectRange a date by taping on it and can page the calendar to a desired date.
+ * A user can selectRanges a date by taping on it and can page the calendar to a desired date.
  * </p>
  * <p>
  * By default, the range of dates shown is from 200 years in the past to 200 years in the future.
@@ -74,7 +75,7 @@ public class MaterialCalendarView extends ViewGroup {
      * @see #setSelectionMode(int)
      * @see #getSelectionMode()
      */
-    @Retention(RetentionPolicy.RUNTIME)
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({SELECTION_MODE_NONE, SELECTION_MODE_SINGLE, SELECTION_MODE_MULTIPLE, SELECTION_MODE_RANGE})
     public @interface SelectionMode {
     }
@@ -87,7 +88,7 @@ public class MaterialCalendarView extends ViewGroup {
 
     /**
      * Selection mode that allows one selected date at one time. This is the default mode.
-     * When switching from {@linkplain #SELECTION_MODE_MULTIPLE}, this will selectRange the same date
+     * When switching from {@linkplain #SELECTION_MODE_MULTIPLE}, this will selectRanges the same date
      * as from {@linkplain #getSelectedDate()}, which should be the last selected date
      */
     public static final int SELECTION_MODE_SINGLE = 1;
@@ -109,7 +110,7 @@ public class MaterialCalendarView extends ViewGroup {
      * @see #getShowOtherDates()
      */
     @SuppressLint("UniqueConstants")
-    @Retention(RetentionPolicy.RUNTIME)
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef(flag = true, value = {
             SHOW_NONE, SHOW_ALL, SHOW_DEFAULTS,
             SHOW_OUT_OF_RANGE, SHOW_OTHER_MONTHS, SHOW_DECORATED_DISABLED
@@ -304,17 +305,17 @@ public class MaterialCalendarView extends ViewGroup {
                     .setCalendarDisplayMode(CalendarMode.values()[calendarModeIndex])
                     .commit();
 
-            final int tileSize = a.getLayoutDimension(R.styleable.MaterialCalendarView_mcv_tileSize, INVALID_TILE_DIMENSION);
+            @SuppressWarnings("ResourceType") final int tileSize = a.getLayoutDimension(R.styleable.MaterialCalendarView_mcv_tileSize, INVALID_TILE_DIMENSION);
             if (tileSize > INVALID_TILE_DIMENSION) {
                 setTileSize(tileSize);
             }
 
-            final int tileWidth = a.getLayoutDimension(R.styleable.MaterialCalendarView_mcv_tileWidth, INVALID_TILE_DIMENSION);
+            @SuppressWarnings("ResourceType") final int tileWidth = a.getLayoutDimension(R.styleable.MaterialCalendarView_mcv_tileWidth, INVALID_TILE_DIMENSION);
             if (tileWidth > INVALID_TILE_DIMENSION) {
                 setTileWidth(tileWidth);
             }
 
-            final int tileHeight = a.getLayoutDimension(R.styleable.MaterialCalendarView_mcv_tileHeight, INVALID_TILE_DIMENSION);
+            @SuppressWarnings("ResourceType") final int tileHeight = a.getLayoutDimension(R.styleable.MaterialCalendarView_mcv_tileHeight, INVALID_TILE_DIMENSION);
             if (tileHeight > INVALID_TILE_DIMENSION) {
                 setTileHeight(tileHeight);
             }
@@ -805,7 +806,7 @@ public class MaterialCalendarView extends ViewGroup {
     }
 
     /**
-     * @param calendar a Calendar set to a day to selectRange. Null to clear selection
+     * @param calendar a Calendar set to a day to selectRanges. Null to clear selection
      */
     public void setSelectedDate(@Nullable Calendar calendar) {
         setSelectedDate(CalendarDay.from(calendar));
@@ -1395,6 +1396,12 @@ public class MaterialCalendarView extends ViewGroup {
         }
     }
 
+    protected void dispatchOnRangesSelected(Range... ranges) {
+        for (Range range : ranges) {
+            this.dispatchOnRangeSelected(range.from, range.to);
+        }
+    }
+
     /**
      * Dispatch a range of days to a listener, if set. First day must be before last Day.
      *
@@ -1413,10 +1420,13 @@ public class MaterialCalendarView extends ViewGroup {
 
         while (counter.before(end) || counter.equals(end)) {
             final CalendarDay current = CalendarDay.from(counter);
-            adapter.setDateSelected(current, true);
+//            adapter.setDateSelected(current, true);
             days.add(current);
             counter.add(Calendar.DATE, 1);
         }
+
+        Collections.sort(days, new CalendarDayComparator());
+        adapter.setDateRangeSelected(days);
 
         if (listener != null) {
             listener.onRangeSelected(MaterialCalendarView.this, days);
@@ -1481,8 +1491,8 @@ public class MaterialCalendarView extends ViewGroup {
     /**
      * Select a fresh range of date including first day and last day.
      *
-     * @param firstDay first day of the range to selectRange
-     * @param lastDay  last day of the range to selectRange
+     * @param firstDay first day of the range to selectRanges
+     * @param lastDay  last day of the range to selectRanges
      */
     public void selectRange(final CalendarDay firstDay, final CalendarDay lastDay) {
         clearSelection();
@@ -1495,13 +1505,39 @@ public class MaterialCalendarView extends ViewGroup {
         }
     }
 
-    public void select(Range range) {
-        this.selectRange(range.from, range.to);
+    private void select(boolean clearSelection, Range... ranges) {
+        if (ranges.length == 0) {
+            return;
+        }
+
+        if (ranges.length > 1) {
+            if (this.selectionMode != SELECTION_MODE_NONE) {
+                throw new IllegalArgumentException("Selection of multiple ranges is supported only with SELECTION_MODE_NONE.");
+            }
+        }
+
+        if (clearSelection) {
+            clearSelection();
+        }
+
+        selectRanges(ranges);
     }
 
-//    public void selectRanges(Range... ranges) {
-//
-//    }
+    public void select(Range... ranges) {
+        select(true, ranges);
+    }
+
+    public void add(Range... ranges) {
+        select(false, ranges);
+    }
+
+    /**
+     * Select date range.
+     * @param range
+     */
+    private void selectRanges(Range... range) {
+        adapter.selectRanges(range);
+    }
 
     /**
      * Call by {@link CalendarPagerView} to indicate that a day was clicked and we should handle it
@@ -1889,7 +1925,7 @@ public class MaterialCalendarView extends ViewGroup {
 
         /**
          * Set calendar display mode. The default mode is Months.
-         * When switching between modes will selectRange todays date, or the selected date,
+         * When switching between modes will selectRanges todays date, or the selected date,
          * if selection mode is single.
          *
          * @param mode - calendar mode

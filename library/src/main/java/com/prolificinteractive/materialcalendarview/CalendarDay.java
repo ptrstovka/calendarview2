@@ -290,6 +290,10 @@ public final class CalendarDay implements Parcelable {
         dest.writeInt(day);
     }
 
+    public CalendarDay copy() {
+        return CalendarDay.from(year, month, day);
+    }
+
     public static final Creator<CalendarDay> CREATOR = new Creator<CalendarDay>() {
         public CalendarDay createFromParcel(Parcel in) {
             return new CalendarDay(in);

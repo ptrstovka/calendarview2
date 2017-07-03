@@ -14,14 +14,15 @@
         app:mcv_weekDayTextAppearance="@style/CustomWeekTextAppearance"
         app:mcv_selectionColor="#4DB9C8"
         app:mcv_circlePadding="5dp"
+        app:mcv_showOtherDates="all"
         />
 
     <Button
-        android:id="@+id/calendar_invalidate_button"
+        android:id="@+id/calendar_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="invalidate"
+        android:text="@string/text_action"
         />
 
 </FrameLayout>

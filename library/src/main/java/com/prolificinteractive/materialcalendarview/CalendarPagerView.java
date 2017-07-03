@@ -2,6 +2,7 @@ package com.prolificinteractive.materialcalendarview;
 
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
@@ -16,9 +17,11 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.SHOW_DEFAULTS;
 import static com.prolificinteractive.materialcalendarview.MaterialCalendarView.showOtherMonths;
+import static com.prolificinteractive.materialcalendarview.RangeDaySelectionCalculator.getSelectionsFor;
 import static java.util.Calendar.DATE;
 
 abstract class CalendarPagerView extends ViewGroup implements View.OnClickListener {
@@ -163,8 +166,12 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
     }
 
     public void setSelectedDates(Collection<CalendarDay> dates) {
+        setSelectedDates(dates, false);
+    }
 
-        if (dates == null || dates.isEmpty()) {
+    public void setSelectedDates(Collection<CalendarDay> dates, boolean onlyAdd) {
+
+        if ((dates == null) || (dates.isEmpty() && !onlyAdd)) {
             for (DayView dayView : dayViews) {
                 dayView.setSelection(DayView.SELECTION_NORMAL);
                 dayView.setChecked(false);
@@ -174,7 +181,7 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
             return;
         }
 
-        if (dates.size() == 1) {
+        if ((dates.size() == 1) && !onlyAdd) {
             for (DayView dayView : dayViews) {
                 if (dates.contains(dayView.getDate())) {
                     dayView.setSelection(DayView.SELECTION_NORMAL);
@@ -197,7 +204,7 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
             CalendarDay day = dayView.getDate();
             boolean isChecked = list.contains(day);
 
-            if (!isChecked) {
+            if (!isChecked && !onlyAdd) {
                 dayView.setSelection(DayView.SELECTION_NORMAL);
                 dayView.setChecked(false);
                 continue;
@@ -226,12 +233,6 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
             boolean isLastDay = last != null && last.equals(day);
             boolean isMiddleDay = !isFirstDay && !isLastDay;
 
-//            if (isMiddleDay) {
-//                dayView.setSelection(DayView.SELECTION_RANGE);
-//            } else {
-//                dayView.setSelection(DayView.SELECTION_NORMAL);
-//            }
-
             if (isFirstDay && isFirstDayInRow) {
                 dayView.setSelection(DayView.SELECTION_FIRST);
             } else if (isFirstDay && isMiddleDayInRow) {
@@ -251,37 +252,6 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
             } else if (isLastDay && isLastDayInRow) {
                 dayView.setSelection(DayView.SELECTION_LAST);
             }
-
-
-//            if (list.contains(day)) {
-//                dayView.setChecked(true);
-
-//                if (first.equals(day)) {
-//                    if (isLastDayOfWeek) {
-//                        dayView.setSelection(DayView.SELECTION_NORMAL);
-//                    } else {
-//                        dayView.setSelection(DayView.SELECTION_FIRST);
-//                    }
-//                } else if (last != null) {
-////                    if (last.equals(day)) {
-////
-////                    }
-//                }
-//
-//                if (isFirstDayInRow && !first.equals(day)) {
-//                    dayView.setSelection(DayView.SELECTION_NORMAL);
-//                } else if (isLastDayInRow && last != null && day.equals(last)) {
-//                    dayView.setSelection(DayView.SELECTION_NORMAL);
-//                } else if (first.equals(day)) {
-//                    dayView.setSelection(DayView.SELECTION_FIRST);
-//                } else if (last != null && day.equals(last)) {
-//                    dayView.setSelection(DayView.SELECTION_LAST);
-//                } else {
-//                    dayView.setSelection(DayView.SELECTION_RANGE);
-//                }
-
-
-//            dayView.setChecked(list != null && list.contains(day));
         }
         postInvalidate();
     }
@@ -492,4 +462,28 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
             super(WRAP_CONTENT, WRAP_CONTENT);
         }
     }
+
+    // ----------------- custom code ------------------ //
+
+    public void selectRange(Range range) {
+        Log.d(TAG, "selectRanges: called select range on pager view: " + range.toString());
+
+        Map<CalendarDay, Integer> results = getSelectionsFor(range);
+
+        for (DayView dayView : dayViews) {
+            CalendarDay day = dayView.getDate();
+
+            if (range.isInRange(day)) {
+                dayView.setChecked(true);
+
+                Integer selection = results.get(day);
+
+                if (selection != null) {
+                    //noinspection WrongConstant
+                    dayView.setSelection(selection);
+                }
+            }
+        }
+    }
+
 }

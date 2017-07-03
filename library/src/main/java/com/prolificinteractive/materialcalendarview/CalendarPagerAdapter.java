@@ -2,6 +2,7 @@ package com.prolificinteractive.materialcalendarview;
 
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,6 +15,9 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.prolificinteractive.materialcalendarview.RangeOverlapCalculator.join;
+import static java.util.Arrays.asList;
 
 /**
  * Pager adapter backing the calendar view
@@ -35,6 +39,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     private CalendarDay maxDate = null;
     private DateRangeIndex rangeIndex;
     private List<CalendarDay> selectedDates = new ArrayList<>();
+    private List<Range> selectedRanges = new ArrayList<>();
     private WeekDayFormatter weekDayFormatter = WeekDayFormatter.DEFAULT;
     private DayFormatter dayFormatter = DayFormatter.DEFAULT;
     private List<DayViewDecorator> decorators = new ArrayList<>();
@@ -82,8 +87,6 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         return rangeIndex.getCount();
     }
 
-    private static final String TAG = "CalendarPagerAdapter";
-
     public void setDayCirclePadding(int padding) {
         dayCirclePadding = padding;
         for (V currentView : currentViews) {
@@ -106,6 +109,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         newAdapter.minDate = minDate;
         newAdapter.maxDate = maxDate;
         newAdapter.selectedDates = selectedDates;
+        newAdapter.selectedRanges = selectedRanges;
         newAdapter.weekDayFormatter = weekDayFormatter;
         newAdapter.dayFormatter = dayFormatter;
         newAdapter.decorators = decorators;
@@ -176,6 +180,10 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         pagerView.setMinimumDate(minDate);
         pagerView.setMaximumDate(maxDate);
         pagerView.setSelectedDates(selectedDates);
+
+        for (Range selectedRange : selectedRanges) {
+            pagerView.selectRange(selectedRange);
+        }
 
         container.addView(pagerView);
         currentViews.add(pagerView);
@@ -306,6 +314,13 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         }
     }
 
+    public void setDateRangeSelected(List<CalendarDay> days) {
+        selectedDates.addAll(days);
+        for (V currentView : currentViews) {
+            currentView.setSelectedDates(days, true);
+        }
+    }
+
     private void invalidateSelectedDates() {
         validateSelectedDates();
         for (V pagerView : currentViews) {
@@ -341,4 +356,31 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     protected int getWeekDayTextAppearance() {
         return weekDayTextAppearance == null ? 0 : weekDayTextAppearance;
     }
+
+    // -----------  custom code ------------------ //
+
+    private static final String TAG = "CalendarPagerAdapter";
+
+    public void selectRanges(@NonNull Range... range) {
+        selectedRanges.addAll(join(asList(range)));
+        invalidateSelectedRanges();
+    }
+
+    private void invalidateSelectedRanges() {
+        if (selectedRanges.isEmpty()) {
+            Log.d(TAG, "invalidateSelectedRanges: selected ranges is empty");
+            return;
+        }
+
+        for (Range selectedRange : selectedRanges) {
+            selectRangeOnViews(selectedRange);
+        }
+    }
+
+    private void selectRangeOnViews(Range range) {
+        for (V currentView : currentViews) {
+            currentView.selectRange(range);
+        }
+    }
+
 }

@@ -14,6 +14,7 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.OnRangeSelectedListener;
 import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,6 +24,7 @@ import butterknife.OnClick;
 import static com.prolificinteractive.materialcalendarview.CalendarDay.from;
 import static com.prolificinteractive.materialcalendarview.Range.range;
 
+@SuppressWarnings("unused")
 public class FeatureTestActivity extends AppCompatActivity {
 
     private static final String TAG = "FeatureTestActivity";
@@ -35,8 +37,29 @@ public class FeatureTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feature_test);
         ButterKnife.bind(this);
-        calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);
+        calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_NONE);
+        selectRange();
 
+//        Range range = range(from(2017, Calendar.JULY, 4), from(2017, Calendar.JULY, 10));
+//        for (CalendarDay calendarDay : range.days()) {
+//            Log.d(TAG, "onCreate: " + calendarDay.toString());
+//        }
+    }
+
+    @OnClick(R.id.calendar_action_button)
+    public void onActionButtonClick() {
+        selectRange();
+    }
+
+    private void selectRange() {
+        calendarView.select(
+                range(from(2017, Calendar.JULY, 4), from(2017, Calendar.JULY, 10)),
+                range(from(2017, Calendar.JULY, 14), from(2017, Calendar.JULY, 18)),
+                range(from(2017, Calendar.JULY, 29), from(2017, Calendar.AUGUST, 29))
+        );
+    }
+
+    private void addCurrentDayDecorator() {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget,
@@ -53,20 +76,13 @@ public class FeatureTestActivity extends AppCompatActivity {
         });
 
         calendarView.addDecorator(new CurrentDayDecorator(calendarView));
-
-        calendarView.select(range(from(2017, 5, 8), from(2017, 5, 16)));
-    }
-
-    @OnClick(R.id.calendar_invalidate_button)
-    public void onInvalidateButtonClick() {
-        calendarView.selectRange(from(2017, 5, 8), from(2017, 5, 16));
     }
 
     private class CurrentDayDecorator extends DayViewDecorator {
 
         private MaterialCalendarView view;
 
-        public CurrentDayDecorator(MaterialCalendarView view) {
+        CurrentDayDecorator(MaterialCalendarView view) {
             this.view = view;
         }
 

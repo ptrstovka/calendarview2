@@ -74,7 +74,7 @@ class DayView extends CheckedTextView {
     private Rect rightRect = new Rect();
     private Paint rectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    @Retention(RetentionPolicy.RUNTIME)
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef(flag = true, value = {
             SELECTION_FIRST, SELECTION_LAST, SELECTION_NORMAL, SELECTION_RANGE,
             SELECTION_RANGE_LEFT, SELECTION_RANGE_RIGHT
