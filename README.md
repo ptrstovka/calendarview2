@@ -1,75 +1,54 @@
-<img src="/images/hero.png"/>
 
-Material Calendar View 
+WIP
 ======================
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Material%20Calendar%20View-blue.svg?style=flat)](https://android-arsenal.com/details/1/1531) [![Maven Central](https://img.shields.io/maven-central/v/com.prolificinteractive/material-calendarview.svg?maxAge=2592000)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22material-calendarview%22) [![Travis branch](https://img.shields.io/travis/prolificinteractive/material-calendarview.svg?maxAge=2592000)](https://travis-ci.org/prolificinteractive/material-calendarview)
+The API is going to change in versions 2.0-alpha+ until there will be stable 2.0 version.
 
-A Material design back port of Android's CalendarView. The goal is to have a Material look
-and feel, rather than 100% parity with the platform's implementation.
+For version 1.+ please check the [original repository](https://github.com/prolificinteractive/material-calendarview).
 
-<img src="/images/screencast.gif" alt="Demo Screen Capture" width="300px" />
+Calendar View 2
+======================
+
+[![Download](https://api.bintray.com/packages/ptrstovka/maven/calendarview2/images/download.svg) ](https://bintray.com/ptrstovka/maven/calendarview2/_latestVersion)[![Build Status](https://travis-ci.org/ptrstovka/material-calendarview.svg?branch=master)](https://travis-ci.org/ptrstovka/material-calendarview)
+
+This is improved Material CalendarView from [Prolific Interactive](https://github.com/prolificinteractive/material-calendarview). My version 2+ has some breaking changes to the core, so the API is not backward compatible with prolific version.
+
+<img src="/images/shot.png" alt="Demo" width="300px" />
 
 Usage
 -----
-
-1. Add `compile 'com.prolificinteractive:material-calendarview:1.4.3'` to your dependencies.
-2. Add `MaterialCalendarView` into your layouts or view hierarchy.
-3. Set a `OnDateSelectedListener` or call `MaterialCalendarView.getSelectedDates()` when you need it.
-
-
-[Javadoc Available Here](http://prolificinteractive.github.io/material-calendarview/)
+1. Add maven url to your main build.gradle file.
+```
+repositories {
+    maven {
+        url  "http://dl.bintray.com/ptrstovka/maven"
+    }
+}
+```
+2. Add library as dependency in your module build.gradle file.
+```
+compile 'com.ptrstovka.calendarview2:calendarview2:2.0-alpha1'
+```
+3. You are done, now you can use `MaterialCalendarView` in your code & layouts.
 
 Example:
 
 ```xml
 <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/calendarView"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    app:mcv_weekDayTextAppearance="@style/CustomWeekTextAppearance"
+    app:mcv_selectionColor="#4DB9C8"
+    app:mcv_circlePadding="5dp"
     app:mcv_showOtherDates="all"
-    app:mcv_selectionColor="#00F"
     />
 ```
-#### @Experimental
-`CalendarMode.WEEK` and all week mode functionality is officially marked `@Experimental`. All APIs
-marked `@Experimental` are subject to change quickly and should not be used in production code. They
-are allowed for testing and feedback.
-
-Major Change in 1.4.0
----------------------
-* Breaking Change: `setFirstDayOfWeek`, `setMin/MaxDate`, and `setCalendarDisplayMode` are moved to a `State` object. This was necessary because it was unclear that these were not simple setters--individually, they were side effecting and triggered full adapter/date range recalculations. Typical usage of the view involves setting all these invariants up front during `onCreate` and it was unknown to the user that setting all 4 of these would create a lot of waste. Not to mention certain things were side effecting--some would reset the current day or selected date. As a result, the same 4 methods called in a different order could result in a different state, which is bad.
-
-  For most cases you will simply need to replace setting those invariants with: 
-  ```java
-  mcv.state().edit()
-    .setFirstDayOfWeek(Calendar.WEDNESDAY)
-    .setMinimumDate(CalendarDay.from(2016, 4, 3))
-    .setMaximumDate(CalendarDay.from(2016, 5, 12))
-    .setCalendarDisplayMode(CalendarMode.WEEKS)
-    .commit();
-  ```
-
-  `mcv.state().edit()` will retain previously set values; `mcv.newState()` will create a new state using default values. Calling `commit` will trigger the rebuild of adapters and date ranges. It is recommended these state changes occur as the first modification to MCV (before configuring anything else like current date or selected date); we make no guarantee those modifications will be retained when the state is modified.
-
-  See [CUSTOMIZATION_BUILDER](docs/CUSTOMIZATION_BUILDER.md) for usage details.
-* New: `setSelectionMode(SELECTION_MODE_RANGE)` was added to allow 2 dates to be selected and have the entire range of dates selected. Much thanks to [papageorgiouk](https://github.com/papageorgiouk) for his work on this feature. 
-
-See other changes in the [CHANGELOG](/CHANGELOG.md).
-
-Major Change in 1.3.0
----------------------
-* Breaking change: `getTileSize` is deprecated. Use `getTileWidth` or `getTileHeight`.
-* Added `goToNext` and `goToPrevious` API to programmatically trigger paging
-* Allow users to click on dates outside of current month with `setAllowClickDaysOutsideCurrentMonth`
-* Set tile width/height separately rather than single tile size with `setTileWidth` and `setTileHeight`
-* Attributes: mcv_tileWidth, mcv_tileHeight, mcv_calendarMode
-* TalkBack APIs: `setContentDescriptionArrowPast`, `ArrowFuture`, `Calendar`
 
 Documentation
 -------------
 
 Make sure to check all the documentation available [here](docs/README.md).
+
+Javadoc is available [here](https://ptrstovka.github.io/calendarview2/).
 
 Customization
 -------------
@@ -107,6 +86,4 @@ Material Calendar View is Copyright (c) 2017 Prolific Interactive. It may be red
 
 ## Maintainers
 
-![prolific](https://s3.amazonaws.com/prolificsitestaging/logos/Prolific_Logo_Full_Color.png)
-
-Material Calendar View is maintained and funded by Prolific Interactive. The names and logos are trademarks of Prolific Interactive.
+Version 1.+ is maintained and funded by Prolific Interactive. The names and logos are trademarks of Prolific Interactive.

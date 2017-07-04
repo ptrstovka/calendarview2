@@ -82,4 +82,4 @@ proguard/
 # Log Files
 *.log
 
-
+.github_changelog_generator

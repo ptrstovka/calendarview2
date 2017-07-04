@@ -54,8 +54,7 @@ public class FeatureTestActivity extends AppCompatActivity {
     private void selectRange() {
         calendarView.select(
                 range(from(2017, Calendar.JULY, 4), from(2017, Calendar.JULY, 10)),
-                range(from(2017, Calendar.JULY, 14), from(2017, Calendar.JULY, 18)),
-                range(from(2017, Calendar.JULY, 29), from(2017, Calendar.AUGUST, 29))
+                range(from(2017, Calendar.JULY, 17), from(2017, Calendar.JULY, 21))
         );
     }
 

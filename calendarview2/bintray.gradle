@@ -1,18 +1,18 @@
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'calendarview'
-    publishedGroupId = 'com.ptrstovka.calendarview'
-    libraryName = 'Material CalendarView'
-    artifact = 'calendarview'
+    bintrayName = 'calendarview2'
+    publishedGroupId = 'com.ptrstovka.calendarview2'
+    libraryName = 'Calendar view 2'
+    artifact = 'calendarview2'
     libraryDescription = 'Material calendar view backport'
-    siteUrl = 'https://github.com/ptrstovka/calendarview'
-    gitUrl = 'https://github.com/ptrstovka/calendarview.git'
+    siteUrl = 'https://github.com/ptrstovka/calendarview2'
+    gitUrl = 'https://github.com/ptrstovka/calendarview2.git'
     libraryVersion = '2.0-alpha1'
     developerId = 'ptrstovka'
     developerName = 'Peter Stovka'
     developerEmail = 'stovka.peter@gmail.com'
     licenseName = 'MIT'
-    licenseUrl = 'https://github.com/ptrstovka/calendarview/blob/master/LICENSE'
+    licenseUrl = 'https://github.com/ptrstovka/calendarview2/blob/master/LICENSE'
     allLicenses = ["MIT"]
 }
 

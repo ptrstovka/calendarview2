@@ -22,7 +22,7 @@ android {
 dependencies {
     // You should use the commented out line below in you're application.
     // We depend on the source directly here so that development is easier.
-    compile project(':calendarview')
+    compile project(':calendarview2')
     //compile 'com.prolificinteractive:material-calendarview:1.4.3'
 
     compile rootProject.ext.supportAppCompat

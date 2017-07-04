@@ -1,1 +1,1 @@
-include ':calendarview', ':sample'
+include ':calendarview2', ':sample'
