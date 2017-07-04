@@ -8,7 +8,7 @@ For version 1.+ please check the [original repository](https://github.com/prolif
 Calendar View 2
 ======================
 
-[![Download](https://api.bintray.com/packages/ptrstovka/maven/calendarview2/images/download.svg) ](https://bintray.com/ptrstovka/maven/calendarview2/_latestVersion)[![Build Status](https://travis-ci.org/ptrstovka/calendarview2.svg?branch=master)](https://travis-ci.org/ptrstovka/material-calendarview)
+[![Download](https://api.bintray.com/packages/ptrstovka/maven/calendarview2/images/download.svg) ](https://bintray.com/ptrstovka/maven/calendarview2/_latestVersion)[![Build Status](https://travis-ci.org/ptrstovka/calendarview2.svg?branch=master)](https://travis-ci.org/ptrstovka/calendarview2)
 
 This is improved Material CalendarView from [Prolific Interactive](https://github.com/prolificinteractive/material-calendarview). My version 2+ has some breaking changes to the core, so the API is not backward compatible with prolific version.
 
