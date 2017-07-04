@@ -1,12 +1,12 @@
 # Change Log
 
-## [2.0-alpha1](https://github.com/ptrstovka/calendarview/tree/2.0-alpha1) (2017-07-04)
-[Full Changelog](https://github.com/ptrstovka/calendarview/compare/v0.0.1...2.0-alpha1)
+## [2.0-alpha2](https://github.com/ptrstovka/calendarview2/tree/2.0-alpha2) (2017-07-04)
+[Full Changelog](https://github.com/ptrstovka/calendarview2/compare/2.0-alpha1...2.0-alpha2)
 
 **Implemented enhancements:**
 
-- Add ability to invalidate cached decorators [\#2](https://github.com/ptrstovka/calendarview/issues/2)
-- Add ability to select multiple ranges [\#1](https://github.com/ptrstovka/calendarview/issues/1)
+- Add ability to invalidate cached decorators [\#2](https://github.com/ptrstovka/calendarview2/issues/2)
+- Add ability to select multiple ranges [\#1](https://github.com/ptrstovka/calendarview2/issues/1)
 
 
 
