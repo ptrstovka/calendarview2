@@ -28,7 +28,7 @@ repositories {
 ```
 compile 'com.ptrstovka.calendarview2:calendarview2:2.0-alpha2'
 ```
-3. You are done, now you can use `MaterialCalendarView` in your code & layouts.
+3. You are done, now you can use `CalendarView2` in your code & layouts.
 
 Example:
 
