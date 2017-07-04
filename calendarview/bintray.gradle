@@ -3,7 +3,7 @@ ext {
     bintrayName = 'calendarview'
     publishedGroupId = 'com.ptrstovka.calendarview'
     libraryName = 'Material CalendarView'
-    artifact = 'calendarView'
+    artifact = 'calendarview'
     libraryDescription = 'Material calendar view backport'
     siteUrl = 'https://github.com/ptrstovka/calendarview'
     gitUrl = 'https://github.com/ptrstovka/calendarview.git'
