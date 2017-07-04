@@ -26,7 +26,7 @@ repositories {
 ```
 2. Add library as dependency in your module build.gradle file.
 ```
-compile 'com.ptrstovka.calendarview2:calendarview2:2.0-alpha1'
+compile 'com.ptrstovka.calendarview2:calendarview2:2.0-alpha2'
 ```
 3. You are done, now you can use `MaterialCalendarView` in your code & layouts.
 
