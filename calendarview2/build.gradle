@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -48,4 +47,6 @@ android.libraryVariants.all { variant ->
     }
 }
 
-apply from: './bintray.gradle'
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: './bintray.gradle'
+}
