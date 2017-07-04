@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.prolificinteractive.materialcalendarview.sample">
+          package="com.ptrstovka.calendarview2.sample">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.ptrstovka.calendarview2.sample.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -18,12 +18,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OldCalendarViewActivity"
+            android:name="com.ptrstovka.calendarview2.sample.OldCalendarViewActivity"
             android:label="@string/title_activity_old_calendar"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -32,12 +32,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BasicActivity"
+            android:name="com.ptrstovka.calendarview2.sample.BasicActivity"
             android:label="@string/title_activity_basic"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -46,12 +46,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BasicActivityDecorated"
+            android:name="com.ptrstovka.calendarview2.sample.BasicActivityDecorated"
             android:label="@string/title_activity_decorators"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -60,12 +60,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SwappableBasicActivityDecorated"
+            android:name="com.ptrstovka.calendarview2.sample.SwappableBasicActivityDecorated"
             android:label="@string/title_activity_basic_modes"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -74,12 +74,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DisableDaysActivity"
+            android:name="com.ptrstovka.calendarview2.sample.DisableDaysActivity"
             android:label="@string/title_activity_disable"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -88,12 +88,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CustomizeXmlActivity"
+            android:name="com.ptrstovka.calendarview2.sample.CustomizeXmlActivity"
             android:label="@string/title_activity_customize_xml"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -102,12 +102,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CustomizeCodeActivity"
+            android:name="com.ptrstovka.calendarview2.sample.CustomizeCodeActivity"
             android:label="@string/title_activity_customize_code"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -116,12 +116,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DynamicSettersActivity"
+            android:name="com.ptrstovka.calendarview2.sample.DynamicSettersActivity"
             android:label="@string/title_activity_dynamic_setters"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -130,12 +130,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CustomTileDimensions"
+            android:name="com.ptrstovka.calendarview2.sample.CustomTileDimensions"
             android:label="@string/title_activity_custom_tile_size"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -144,12 +144,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DialogsActivity"
+            android:name="com.ptrstovka.calendarview2.sample.DialogsActivity"
             android:label="@string/title_activity_dialogs"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -158,12 +158,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MultipleViewActivity"
+            android:name="com.ptrstovka.calendarview2.sample.MultipleViewActivity"
             android:label="@string/title_activity_multiple_view"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -172,12 +172,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MultipleSizeActivity"
+            android:name="com.ptrstovka.calendarview2.sample.MultipleSizeActivity"
             android:label="@string/title_activity_multiple_size"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"/>
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"/>
 
             <intent-filter>
                 <action android:name="android.intent.action.RUN"/>
@@ -187,14 +187,14 @@
         </activity>
 
         <activity
-            android:name=".FeatureTestActivity"
+            android:name="com.ptrstovka.calendarview2.sample.FeatureTestActivity"
             android:label="@string/title_feature_test_activity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.ptrstovka.calendarview2.sample.MainActivity"
             >
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolificinteractive.materialcalendarview.sample.MainActivity"
+                android:value="com.ptrstovka.calendarview2.sample.MainActivity"
                 />
 
             <intent-filter>

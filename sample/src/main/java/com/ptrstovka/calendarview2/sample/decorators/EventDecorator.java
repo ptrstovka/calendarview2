@@ -1,0 +1,33 @@
+package com.ptrstovka.calendarview2.sample.decorators;
+
+import com.ptrstovka.calendarview2.CalendarDay;
+import com.ptrstovka.calendarview2.DayViewDecorator;
+import com.ptrstovka.calendarview2.DayViewFacade;
+import com.ptrstovka.calendarview2.spans.DotSpan;
+
+import java.util.Collection;
+import java.util.HashSet;
+
+/**
+ * Decorate several days with a dot
+ */
+public class EventDecorator extends DayViewDecorator {
+
+    private int color;
+    private HashSet<CalendarDay> dates;
+
+    public EventDecorator(int color, Collection<CalendarDay> dates) {
+        this.color = color;
+        this.dates = new HashSet<>(dates);
+    }
+
+    @Override
+    public boolean shouldDecorate(CalendarDay day) {
+        return dates.contains(day);
+    }
+
+    @Override
+    public void decorate(DayViewFacade view) {
+        view.addSpan(new DotSpan(5, color));
+    }
+}

@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.prolificinteractive.materialcalendarview.sample.FeatureTestActivity">
+    tools:context="com.ptrstovka.calendarview2.sample.FeatureTestActivity">
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+    <com.ptrstovka.calendarview2.CalendarView2
         android:id="@+id/calendar_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

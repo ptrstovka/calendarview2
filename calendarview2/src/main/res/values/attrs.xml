@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="MaterialCalendarView">
+    <declare-styleable name="CalendarView2">
 
         <attr name="mcv_dateTextAppearance" format="reference" />
         <attr name="mcv_weekDayTextAppearance" format="reference" />
