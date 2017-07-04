@@ -1,0 +1,20 @@
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'calendarview'
+    publishedGroupId = 'com.ptrstovka.calendarview'
+    libraryName = 'Material CalendarView'
+    artifact = 'calendarView'
+    libraryDescription = 'Material calendar view backport'
+    siteUrl = 'https://github.com/ptrstovka/calendarview'
+    gitUrl = 'https://github.com/ptrstovka/calendarview.git'
+    libraryVersion = '2.0-alpha1'
+    developerId = 'ptrstovka'
+    developerName = 'Peter Stovka'
+    developerEmail = 'stovka.peter@gmail.com'
+    licenseName = 'MIT'
+    licenseUrl = 'https://github.com/ptrstovka/calendarview/blob/master/LICENSE'
+    allLicenses = ["MIT"]
+}
+
+apply from: 'https://raw.githubusercontent.com/ptrstovka/configs/master/android/gradle/install.gradle'
+apply from: 'https://raw.githubusercontent.com/ptrstovka/configs/master/android/gradle/bintray.gradle'
