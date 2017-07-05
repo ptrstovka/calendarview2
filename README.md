@@ -16,19 +16,12 @@ This is improved Material CalendarView from [Prolific Interactive](https://githu
 
 Usage
 -----
-1. Add maven url to your main build.gradle file.
-```
-repositories {
-    maven {
-        url  "http://dl.bintray.com/ptrstovka/maven"
-    }
-}
-```
-2. Add library as dependency in your module build.gradle file.
+The artifact is available on jcenter.
+1. Add library as dependency in your module build.gradle file.
 ```
 compile 'com.ptrstovka.calendarview2:calendarview2:2.0-alpha2'
 ```
-3. You are done, now you can use `CalendarView2` in your code & layouts.
+2. You are done, now you can use `CalendarView2` in your code & layouts.
 
 Example:
 
