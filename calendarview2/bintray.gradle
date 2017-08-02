@@ -7,7 +7,7 @@ ext {
     libraryDescription = 'Material calendar view backport'
     siteUrl = 'https://github.com/ptrstovka/calendarview2'
     gitUrl = 'https://github.com/ptrstovka/calendarview2.git'
-    libraryVersion = '2.0-alpha2'
+    libraryVersion = '2.0-alpha3'
     developerId = 'ptrstovka'
     developerName = 'Peter Stovka'
     developerEmail = 'stovka.peter@gmail.com'
