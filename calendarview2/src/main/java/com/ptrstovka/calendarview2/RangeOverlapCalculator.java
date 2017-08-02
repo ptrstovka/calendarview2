@@ -24,8 +24,7 @@ class RangeOverlapCalculator {
     }
 
     private List<Range> joinOverlappingRanges() {
-        List<Range> result = new ArrayList<>(ranges);
-        Collections.sort(result, new RangeComparator());
+        List<Range> result = RangeSorter.sort(ranges);
         while (areOverlapping(result)) {
             result = joinOneOverlappingRange(result);
         }
@@ -33,17 +32,23 @@ class RangeOverlapCalculator {
     }
 
     private List<Range> joinOneOverlappingRange(List<Range> ranges) {
-        List<Range> splitted = new ArrayList<>();
+        List<Range> joined = new ArrayList<>();
         for (int i = 0, j = 1; j < ranges.size(); i++, j++) {
-            if (areOverlapping(ranges.get(i), ranges.get(j))) {
-                splitted.add(joinRanges(ranges.get(i), ranges.get(j)));
+            Range first = ranges.get(i);
+            Range second = ranges.get(j);
+            if (areOverlapping(first, second)) {
+                joined.add(joinRanges(first, second));
                 i += 1;
                 j += 1;
+
+                if (ranges.size() == (j + 1)) {
+                    joined.add(ranges.get(ranges.size() - 1));
+                }
             } else {
-                splitted.add(ranges.get(i));
+                joined.add(ranges.get(i));
             }
         }
-        return splitted;
+        return joined;
     }
 
     private Range joinRanges(Range one, Range two) {
@@ -69,22 +74,6 @@ class RangeOverlapCalculator {
             }
         }
         return false;
-    }
-
-    private class RangeComparator implements Comparator<Range> {
-
-        @Override
-        public int compare(Range o1, Range o2) {
-            if (o1.from.equals(o2.from)) {
-                return 0;
-            }
-            if (o1.from.isBefore(o2.from)) {
-                return -1;
-            } else {
-                return 1;
-            }
-        }
-
     }
 
     static List<Range> join(List<Range> range) {

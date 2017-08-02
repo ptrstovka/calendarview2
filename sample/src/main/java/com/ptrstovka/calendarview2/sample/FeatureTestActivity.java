@@ -12,6 +12,7 @@ import com.ptrstovka.calendarview2.DayViewFacade;
 import com.ptrstovka.calendarview2.CalendarView2;
 import com.ptrstovka.calendarview2.OnDateSelectedListener;
 import com.ptrstovka.calendarview2.OnRangeSelectedListener;
+import com.ptrstovka.calendarview2.Range;
 import com.ptrstovka.calendarview2.spans.DotSpan;
 
 import java.util.Calendar;
@@ -23,6 +24,7 @@ import butterknife.OnClick;
 
 import static com.ptrstovka.calendarview2.CalendarDay.from;
 import static com.ptrstovka.calendarview2.Range.range;
+import static java.util.Arrays.asList;
 
 @SuppressWarnings("unused")
 public class FeatureTestActivity extends AppCompatActivity {
@@ -52,10 +54,13 @@ public class FeatureTestActivity extends AppCompatActivity {
     }
 
     private void selectRange() {
-        calendarView.select(
-                range(from(2017, Calendar.JULY, 4), from(2017, Calendar.JULY, 10)),
-                range(from(2017, Calendar.JULY, 17), from(2017, Calendar.JULY, 21))
+        List<Range> ranges = asList(
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 5)),
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 3)),
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 7))
         );
+
+        calendarView.select(ranges);
     }
 
     private void addCurrentDayDecorator() {

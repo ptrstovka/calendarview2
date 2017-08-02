@@ -366,6 +366,11 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
         invalidateSelectedRanges();
     }
 
+    public void selectRanges(@NonNull List<Range> ranges) {
+        selectedRanges.addAll(join(ranges));
+        invalidateSelectedRanges();
+    }
+
     private void invalidateSelectedRanges() {
         if (selectedRanges.isEmpty()) {
             Log.d(TAG, "invalidateSelectedRanges: selected ranges is empty");

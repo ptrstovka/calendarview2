@@ -11,8 +11,7 @@ import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by: Peter Štovka <stovka.peter@gmail.com>
- * Created at: 7/3/17.
+ * @author Peter Štovka <stovka.peter@gmail.com>
  */
 public class RangeOverlapCalculatorTest {
 
@@ -23,9 +22,40 @@ public class RangeOverlapCalculatorTest {
                 range(from(2017, Calendar.JANUARY, 2), from(2017, Calendar.JANUARY, 5))
         );
 
-        assertEquals(ranges.size(), 2);
+        assertEquals(2, ranges.size());
         List<Range> result = RangeOverlapCalculator.join(ranges);
-        assertEquals(result.size(), 1);
+        assertEquals(1, result.size());
+
+        Range range = result.get(0);
+        assertEquals(1, range.from.getDay());
+        assertEquals(Calendar.JANUARY, range.from.getMonth());
+        assertEquals(2017, range.from.getYear());
+
+        assertEquals(5, range.to.getDay());
+        assertEquals(Calendar.JANUARY, range.to.getMonth());
+        assertEquals(2017, range.to.getYear());
+    }
+
+    @Test
+    public void should_join_overlaping_ranges_to_one() throws Exception {
+        List<Range> ranges = asList(
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 5)),
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 3)),
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 7))
+        );
+
+        assertEquals(3, ranges.size());
+        List<Range> result = RangeOverlapCalculator.join(ranges);
+        assertEquals(1, result.size());
+        Range range = result.get(0);
+
+        assertEquals(1, range.from.getDay());
+        assertEquals(Calendar.AUGUST, range.from.getMonth());
+        assertEquals(2017, range.from.getYear());
+
+        assertEquals(7, range.to.getDay());
+        assertEquals(Calendar.AUGUST, range.to.getMonth());
+        assertEquals(2017, range.to.getYear());
     }
 
     @Test
@@ -50,6 +80,15 @@ public class RangeOverlapCalculatorTest {
         assertEquals(ranges.size(), 2);
         List<Range> result = RangeOverlapCalculator.join(ranges);
         assertEquals(result.size(), 1);
+
+        Range range = result.get(0);
+        assertEquals(1, range.from.getDay());
+        assertEquals(Calendar.JANUARY, range.from.getMonth());
+        assertEquals(2017, range.from.getYear());
+
+        assertEquals(9, range.to.getDay());
+        assertEquals(Calendar.JANUARY, range.to.getMonth());
+        assertEquals(2017, range.to.getYear());
     }
 
     @Test
@@ -74,6 +113,15 @@ public class RangeOverlapCalculatorTest {
         assertEquals(ranges.size(), 2);
         List<Range> result = RangeOverlapCalculator.join(ranges);
         assertEquals(result.size(), 1);
+
+        Range range = result.get(0);
+        assertEquals(1, range.from.getDay());
+        assertEquals(Calendar.JANUARY, range.from.getMonth());
+        assertEquals(2017, range.from.getYear());
+
+        assertEquals(9, range.to.getDay());
+        assertEquals(Calendar.FEBRUARY, range.to.getMonth());
+        assertEquals(2017, range.to.getYear());
     }
 
     @Test
@@ -86,6 +134,15 @@ public class RangeOverlapCalculatorTest {
         assertEquals(ranges.size(), 2);
         List<Range> result = RangeOverlapCalculator.join(ranges);
         assertEquals(result.size(), 1);
+
+        Range range = result.get(0);
+        assertEquals(1, range.from.getDay());
+        assertEquals(Calendar.JANUARY, range.from.getMonth());
+        assertEquals(2017, range.from.getYear());
+
+        assertEquals(9, range.to.getDay());
+        assertEquals(Calendar.MARCH, range.to.getMonth());
+        assertEquals(2017, range.to.getYear());
     }
 
     @Test
@@ -101,6 +158,15 @@ public class RangeOverlapCalculatorTest {
         assertEquals(ranges.size(), 5);
         List<Range> result = RangeOverlapCalculator.join(ranges);
         assertEquals(result.size(), 1);
+
+        Range range = result.get(0);
+        assertEquals(1, range.from.getDay());
+        assertEquals(Calendar.JANUARY, range.from.getMonth());
+        assertEquals(2017, range.from.getYear());
+
+        assertEquals(25, range.to.getDay());
+        assertEquals(Calendar.JANUARY, range.to.getMonth());
+        assertEquals(2017, range.to.getYear());
     }
 
 }

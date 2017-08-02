@@ -1523,12 +1523,38 @@ public class CalendarView2 extends ViewGroup {
         selectRanges(ranges);
     }
 
+    private void selectList(boolean clearSelection, List<Range> ranges) {
+        if (ranges.size() == 0) {
+            return;
+        }
+
+        if (ranges.size() > 1) {
+            if (this.selectionMode != SELECTION_MODE_NONE) {
+                throw new IllegalArgumentException("Selection of multiple ranges is supported only with SELECTION_MODE_NONE.");
+            }
+        }
+
+        if (clearSelection) {
+            clearSelection();
+        }
+
+        selectRanges(ranges);
+    }
+
     public void select(Range... ranges) {
         select(true, ranges);
     }
 
+    public void select(List<Range> ranges) {
+        selectList(true, ranges);
+    }
+
     public void add(Range... ranges) {
         select(false, ranges);
+    }
+
+    public void add(List<Range> ranges) {
+        selectList(false, ranges);
     }
 
     /**
@@ -1537,6 +1563,10 @@ public class CalendarView2 extends ViewGroup {
      */
     private void selectRanges(Range... range) {
         adapter.selectRanges(range);
+    }
+
+    private void selectRanges(List<Range> ranges){
+        adapter.selectRanges(ranges);
     }
 
     /**
