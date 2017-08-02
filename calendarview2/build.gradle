@@ -10,10 +10,25 @@ android {
 
         versionCode Integer.parseInt(project.VERSION_CODE)
         versionName project.VERSION_NAME
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     lintOptions {
         abortOnError false
+    }
+
+    testOptions {
+        unitTests {
+            // shows result of all tests
+            all {
+                testLogging {
+                    events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+                }
+            }
+
+            returnDefaultValues = true
+        }
     }
 }
 
