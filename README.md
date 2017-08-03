@@ -19,7 +19,7 @@ Usage
 The artifact is available on jcenter.
 1. Add library as dependency in your module build.gradle file.
 ```
-compile 'com.ptrstovka.calendarview2:calendarview2:2.0-alpha3'
+compile 'com.ptrstovka.calendarview2:calendarview2:[latest version]'
 ```
 2. You are done, now you can use `CalendarView2` in your code & layouts.
 
@@ -42,6 +42,8 @@ Documentation
 Make sure to check all the documentation available [here](docs/README.md).
 
 Javadoc is available [here](https://ptrstovka.github.io/calendarview2/).
+
+More docs will be available on 2.0 release.
 
 Customization
 -------------
