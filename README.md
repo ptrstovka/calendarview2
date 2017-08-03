@@ -41,7 +41,7 @@ Documentation
 
 Make sure to check all the documentation available [here](docs/README.md).
 
-Javadoc is available [here](https://ptrstovka.github.io/calendarview2/).
+Javadoc is available [here](https://ptrstovka.github.io/docs/calendarview2/).
 
 More docs will be available on 2.0 release.
 
