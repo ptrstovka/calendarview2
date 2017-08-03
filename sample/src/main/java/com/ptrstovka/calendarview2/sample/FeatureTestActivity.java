@@ -41,11 +41,6 @@ public class FeatureTestActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         calendarView.setSelectionMode(CalendarView2.SELECTION_MODE_NONE);
         selectRange();
-
-//        Range range = range(from(2017, Calendar.JULY, 4), from(2017, Calendar.JULY, 10));
-//        for (CalendarDay calendarDay : range.days()) {
-//            Log.d(TAG, "onCreate: " + calendarDay.toString());
-//        }
     }
 
     @OnClick(R.id.calendar_action_button)
@@ -57,7 +52,8 @@ public class FeatureTestActivity extends AppCompatActivity {
         List<Range> ranges = asList(
                 range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 5)),
                 range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 3)),
-                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 7))
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 7)),
+                range(from(2017, Calendar.AUGUST, 10), from(2017, Calendar.AUGUST, 27))
         );
 
         calendarView.select(ranges);

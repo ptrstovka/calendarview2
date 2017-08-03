@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by: Peter Štovka <stovka.peter@gmail.com>
- * Created at: 6/30/17.
+ * @author Peter Štovka <stovka.peter@gmail.com>
  */
 
 public class Range {
@@ -29,7 +28,7 @@ public class Range {
                 to.getDay(), to.getMonth(), to.getYear());
     }
 
-    public boolean isInRange(@NonNull CalendarDay day) {
+    boolean isInRange(@NonNull CalendarDay day) {
         return from.equals(day) || to.equals(day) || (from.isBefore(day) && to.isAfter(day));
     }
 

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.ptrstovka.calendarview2.RangeOverlapCalculator.join;
+import static com.ptrstovka.calendarview2.RangeOverlapMerger.join;
 import static java.util.Arrays.asList;
 
 /**

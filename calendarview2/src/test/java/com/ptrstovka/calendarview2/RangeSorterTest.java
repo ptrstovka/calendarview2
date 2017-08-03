@@ -1,7 +1,5 @@
 package com.ptrstovka.calendarview2;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -22,9 +20,10 @@ public class RangeSorterTest {
         Range first = range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 3));
         Range second = range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 5));
         Range third = range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 7));
+        Range fourth = range(from(2017, Calendar.AUGUST, 10), from(2017, Calendar.AUGUST, 27));
 
-        List<Range> result = RangeSorter.sort(asList(second, first, third));
-        List<Range> expected = asList(first, second, third);
+        List<Range> result = RangeSorter.sort(asList(second, first, third, fourth));
+        List<Range> expected = asList(first, second, third, fourth);
         assertEquals(expected, result);
     }
 }

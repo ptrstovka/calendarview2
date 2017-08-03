@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Peter Štovka <stovka.peter@gmail.com>
  */
-public class RangeOverlapCalculatorTest {
+public class RangeOverlapMergerTest {
 
     @Test
     public void should_join_overlapping_ranges() throws Exception {
@@ -23,7 +23,7 @@ public class RangeOverlapCalculatorTest {
         );
 
         assertEquals(2, ranges.size());
-        List<Range> result = RangeOverlapCalculator.join(ranges);
+        List<Range> result = RangeOverlapMerger.join(ranges);
         assertEquals(1, result.size());
 
         Range range = result.get(0);
@@ -45,7 +45,7 @@ public class RangeOverlapCalculatorTest {
         );
 
         assertEquals(3, ranges.size());
-        List<Range> result = RangeOverlapCalculator.join(ranges);
+        List<Range> result = RangeOverlapMerger.join(ranges);
         assertEquals(1, result.size());
         Range range = result.get(0);
 
@@ -59,6 +59,38 @@ public class RangeOverlapCalculatorTest {
     }
 
     @Test
+    public void should_join_overlaping_ranges_to_two() throws Exception {
+        List<Range> ranges = asList(
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 5)),
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 3)),
+                range(from(2017, Calendar.AUGUST, 1), from(2017, Calendar.AUGUST, 7)),
+                range(from(2017, Calendar.AUGUST, 10), from(2017, Calendar.AUGUST, 27))
+        );
+
+        assertEquals(4, ranges.size());
+        List<Range> result = RangeOverlapMerger.join(ranges);
+        assertEquals(2, result.size());
+        Range range1 = result.get(0);
+
+        assertEquals(1, range1.from.getDay());
+        assertEquals(Calendar.AUGUST, range1.from.getMonth());
+        assertEquals(2017, range1.from.getYear());
+
+        assertEquals(7, range1.to.getDay());
+        assertEquals(Calendar.AUGUST, range1.to.getMonth());
+        assertEquals(2017, range1.to.getYear());
+
+        Range range2 = result.get(1);
+        assertEquals(10, range2.from.getDay());
+        assertEquals(Calendar.AUGUST, range2.from.getMonth());
+        assertEquals(2017, range2.from.getYear());
+
+        assertEquals(27, range2.to.getDay());
+        assertEquals(Calendar.AUGUST, range2.to.getMonth());
+        assertEquals(2017, range2.to.getYear());
+    }
+
+    @Test
     public void should_not_join_ranges() throws Exception {
         List<Range> ranges = asList(
                 range(from(2017, Calendar.JANUARY, 1), from(2017, Calendar.JANUARY, 4)),
@@ -66,7 +98,7 @@ public class RangeOverlapCalculatorTest {
         );
 
         assertEquals(ranges.size(), 2);
-        List<Range> result = RangeOverlapCalculator.join(ranges);
+        List<Range> result = RangeOverlapMerger.join(ranges);
         assertEquals(result.size(), 2);
     }
 
@@ -78,7 +110,7 @@ public class RangeOverlapCalculatorTest {
         );
 
         assertEquals(ranges.size(), 2);
-        List<Range> result = RangeOverlapCalculator.join(ranges);
+        List<Range> result = RangeOverlapMerger.join(ranges);
         assertEquals(result.size(), 1);
 
         Range range = result.get(0);
@@ -99,7 +131,7 @@ public class RangeOverlapCalculatorTest {
         );
 
         assertEquals(ranges.size(), 2);
-        List<Range> result = RangeOverlapCalculator.join(ranges);
+        List<Range> result = RangeOverlapMerger.join(ranges);
         assertEquals(result.size(), 2);
     }
 
@@ -111,7 +143,7 @@ public class RangeOverlapCalculatorTest {
         );
 
         assertEquals(ranges.size(), 2);
-        List<Range> result = RangeOverlapCalculator.join(ranges);
+        List<Range> result = RangeOverlapMerger.join(ranges);
         assertEquals(result.size(), 1);
 
         Range range = result.get(0);
@@ -132,7 +164,7 @@ public class RangeOverlapCalculatorTest {
         );
 
         assertEquals(ranges.size(), 2);
-        List<Range> result = RangeOverlapCalculator.join(ranges);
+        List<Range> result = RangeOverlapMerger.join(ranges);
         assertEquals(result.size(), 1);
 
         Range range = result.get(0);
@@ -156,7 +188,7 @@ public class RangeOverlapCalculatorTest {
         );
 
         assertEquals(ranges.size(), 5);
-        List<Range> result = RangeOverlapCalculator.join(ranges);
+        List<Range> result = RangeOverlapMerger.join(ranges);
         assertEquals(result.size(), 1);
 
         Range range = result.get(0);

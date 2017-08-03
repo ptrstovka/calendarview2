@@ -39,10 +39,8 @@ class RangeSorter {
                 if (first.to.equals(second.to)) {
                     return SAME;
                 } else if (first.to.isBefore(second.to)) {
-                    // ak je prvy 1 pred druhym 10
                     return SECOND_HIGHER;
                 } else {
-                    // ak je druhy 1 pred prvym 10
                     return FIRST_HIGHER;
                 }
             }

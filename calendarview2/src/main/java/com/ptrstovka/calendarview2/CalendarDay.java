@@ -303,4 +303,19 @@ public final class CalendarDay implements Parcelable {
             return new CalendarDay[size];
         }
     };
+
+    /**
+     * Returns higher calendar day.
+     * @param one first calendar day
+     * @param two second calendar day
+     * @return the highest calendar day
+     */
+    static CalendarDay max(CalendarDay one, CalendarDay two) {
+        if (one.isAfter(two)) {
+            return one;
+        } else {
+            return two;
+        }
+    }
+
 }
