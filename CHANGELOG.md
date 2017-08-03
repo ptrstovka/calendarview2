@@ -1,7 +1,13 @@
 # Change Log
 
-## [2.0-alpha2](https://github.com/ptrstovka/calendarview2/tree/2.0-alpha2) (2017-07-04)
-[Full Changelog](https://github.com/ptrstovka/calendarview2/compare/2.0-alpha1...2.0-alpha2)
+## [2.0-alpha4](https://github.com/ptrstovka/calendarview2/tree/2.0-alpha4) (2017-08-03)
+
+- Fixed issue with bad range merging
+
+[Full Changelog](https://github.com/ptrstovka/calendarview2/compare/2.0-alpha3...2.0-alpha4)
+
+## [2.0-alpha3](https://github.com/ptrstovka/calendarview2/tree/2.0-alpha3) (2017-08-02)
+[Full Changelog](https://github.com/ptrstovka/calendarview2/compare/2.0-alpha1...2.0-alpha3)
 
 **Implemented enhancements:**
 
