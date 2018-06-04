@@ -317,7 +317,7 @@ abstract class CalendarPagerAdapter<V extends CalendarPagerView> extends PagerAd
     public void setDateRangeSelected(List<CalendarDay> days) {
         selectedDates.addAll(days);
         for (V currentView : currentViews) {
-            currentView.setSelectedDates(days, true);
+            currentView.setSelectedDates(days);
         }
     }
 
