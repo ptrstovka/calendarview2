@@ -216,7 +216,6 @@ abstract class CalendarPagerView extends ViewGroup implements View.OnClickListen
             boolean isMiddleDayInRow = false;
             boolean isLastDayInRow = false;
 
-            int firstDayOfWeek = day.getCalendar().getFirstDayOfWeek();
             int lastDayOfWeek = firstDayOfWeek == Calendar.SUNDAY ?
                     Calendar.SATURDAY : Calendar.SUNDAY;
             int currentDayOfWeek = day.getCalendar().get(Calendar.DAY_OF_WEEK);
