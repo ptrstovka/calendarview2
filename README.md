@@ -6,6 +6,8 @@ version as they are actively develop it.
 
 Here is the [prolific maitained version](https://github.com/prolificinteractive/material-calendarview).
 
+I will archive this repository for now, and will unarchive it when I will have time to develop this library.
+
 Calendar View 2
 ======================
 
