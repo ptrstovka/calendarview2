@@ -1,9 +1,10 @@
 
-WIP
+ANNOUNCEMENT
 ======================
-The API is going to change in versions 2.0-alpha+ until there will be stable 2.0 version.
+As I don't need this library for now, I stop maintaining it for a while. Please, use a prolific
+version as they are actively develop it.
 
-For version 1.+ please check the [original repository](https://github.com/prolificinteractive/material-calendarview).
+Here is the [prolific maitained version](https://github.com/prolificinteractive/material-calendarview).
 
 Calendar View 2
 ======================
